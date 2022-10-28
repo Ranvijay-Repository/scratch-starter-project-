@@ -6,7 +6,6 @@ import Paper from "@material-ui/core/Paper";
 const Wait = ({ events, comp_id, set_wait }) => {
   const [wait, setStateWait] = useState(1);
 
-  // Set Wait value for current component
   function handleChange(e) {
     let val = parseInt(e.target.value);
     setStateWait(val);
@@ -15,7 +14,6 @@ const Wait = ({ events, comp_id, set_wait }) => {
     set_wait(curr);
   }
   return (
-    // Wait Component
     <Paper elevation={3}>
       <div className=" text-center rounded bg-red-400 p-2 my-3">
         <div className="grid grid-cols-2 my-2">
@@ -38,14 +36,12 @@ const Wait = ({ events, comp_id, set_wait }) => {
   );
 };
 
-// map state to component
 const mapStateToProps = state => {
   return {
     events: state.event,
   };
 };
 
-// map function to component
 const mapDispatchToProps = dispatch => {
   return {
     set_wait: value => dispatch(setWait(value)),

@@ -8,7 +8,7 @@ const SayMessage = ({ character, comp_id }) => {
     message: "Hello",
     character_id: "",
   });
-  /* Display Message */
+
   const displayMessage = () => {
     const el = document.getElementById(`${character.active}-message-box`);
     const el2 = document.getElementById(`${character.active}-message-box1`);
@@ -37,7 +37,7 @@ const SayMessage = ({ character, comp_id }) => {
             className="mx-2 p-1 py-0 text-center"
             type="text"
             value={state.message}
-            onChange={(e) => {
+            onChange={e => {
               e.target.value.length > 0 &&
                 setState({ ...state, message: e.target.value });
             }}
@@ -55,8 +55,7 @@ const SayMessage = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to component
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     character: state.character,
   };

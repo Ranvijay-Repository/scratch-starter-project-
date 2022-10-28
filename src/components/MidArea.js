@@ -10,7 +10,6 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import { purple } from "@material-ui/core/colors";
 import Paper from "@material-ui/core/Paper";
 
-// Styling for MaterialUI Components
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
@@ -19,8 +18,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-// Customized button for Running Lists
-const RunButton = withStyles((theme) => ({
+const RunButton = withStyles(theme => ({
   root: {
     color: theme.palette.getContrastText(purple[500]),
     backgroundColor: purple[500],
@@ -31,7 +29,6 @@ const RunButton = withStyles((theme) => ({
   },
 }))(Button);
 
-// Mid Area Component
 function MidArea({ area_list, add_list, event_values }) {
   const classes = useStyles();
   const eventFire = (el, etype) => {
@@ -44,7 +41,6 @@ function MidArea({ area_list, add_list, event_values }) {
     }
   };
 
-  // Handle Running the list
   const handleClick = (arr, id) => {
     if (arr.length === 0) return;
     let i = 0;
@@ -53,7 +49,6 @@ function MidArea({ area_list, add_list, event_values }) {
 
     let str1 = `comp${arr[i]}-${id}-${i}`;
 
-    // Handle Wait at first index
     if (arr[i] === "WAIT") {
       let str2 = `comp${arr[i]}-${id}-${i}`;
       let last_time = new Date().getTime();
@@ -62,23 +57,18 @@ function MidArea({ area_list, add_list, event_values }) {
       while ((curr_time - last_time) / 1000 < event_values.wait[str2] - 2) {
         curr_time = new Date().getTime();
       }
-    }
-
-    // Handle Repeat at first index
-    else if (arr[i] !== "REPEAT") {
+    } else if (arr[i] !== "REPEAT") {
       eventFire(document.getElementById(str1), "click");
     } else {
       repeat = event_values.repeat[str1] + 1;
     }
     i++;
 
-    /* Each function execution takes 2 seconds */
     var cnt = setInterval(() => {
       if (i === arr.length) {
         clearInterval(cnt);
       }
 
-      // Handle Wait
       if (arr[i] === "WAIT") {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         let last_time = new Date().getTime();
@@ -88,15 +78,11 @@ function MidArea({ area_list, add_list, event_values }) {
           curr_time = new Date().getTime();
         }
         i++;
-      }
-      // Handle Repeat Component at current index
-      else if (arr[i] === "REPEAT") {
+      } else if (arr[i] === "REPEAT") {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         repeat = repeat * (event_values.repeat[str2] + 1);
         i++;
-      }
-      // If Repeat component is at previous index
-      else if (arr[i - 1] === "REPEAT" && repeat > 2) {
+      } else if (arr[i - 1] === "REPEAT" && repeat > 2) {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         eventFire(document.getElementById(str2), "click");
         repeat--;
@@ -110,7 +96,7 @@ function MidArea({ area_list, add_list, event_values }) {
   return (
     <div className="flex-1 h-full overflow-auto p-3">
       <div className="flex justify-between">
-        <div className="font-bold mb-5 text-center border border-2 rounded text-white bg-green-400 p-2 w-auto">
+        <div className="font-bold mb-5 text-center border-2 rounded text-white bg-green-400 p-2 w-auto">
           Mid Area
         </div>
 
@@ -127,13 +113,13 @@ function MidArea({ area_list, add_list, event_values }) {
         </div>
       </div>
       <div className="grid grid-flow-col">
-        {area_list.midAreaLists.map((l) => {
+        {area_list.midAreaLists.map(l => {
           return (
             <div className="w-60" key={l.id}>
               <Paper elevation={3} className="p-4">
-                <div className="w-52 border border-2 border-gray-300 p-2">
+                <div className="w-52 border-2 border-gray-300 p-2">
                   <Droppable droppableId={l.id} type="COMPONENTS">
-                    {(provided) => {
+                    {provided => {
                       return (
                         <ul
                           className={`${l.id} w-48 h-full`}
@@ -162,7 +148,7 @@ function MidArea({ area_list, add_list, event_values }) {
                                   draggableId={`${str}-${l.id}-${i}`}
                                   index={i}
                                 >
-                                  {(provided) => (
+                                  {provided => (
                                     <li
                                       ref={provided.innerRef}
                                       {...provided.draggableProps}
@@ -190,15 +176,14 @@ function MidArea({ area_list, add_list, event_values }) {
   );
 }
 
-// mapping state to props
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     area_list: state.list,
     event_values: state.event,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     add_list: () => dispatch(addList()),
   };

@@ -10,8 +10,7 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-// Styling for MaterialUI Components
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     formControl: {
       margin: theme.spacing(1),
@@ -41,36 +40,32 @@ function PreviewArea({ character, add_character, set_active }) {
 
     e = e || window.event;
     e.preventDefault();
-    // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
     document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
+
     document.onmousemove = elementDrag;
   }
 
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
-    // calculate the new cursor position:
+
     pos1 = pos3 - e.clientX;
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
-    // set the element's new position:
 
     elmnt.style.top = elmnt.offsetTop - pos2 + "px";
     elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
   }
 
   function closeDragElement() {
-    /* stop moving when mouse button is released:*/
     document.onmouseup = null;
     document.onmousemove = null;
   }
 
-  // handle changing active character
-  const handleChange = (e) => {
+  const handleChange = e => {
     setActive(e.target.value);
     set_active(e.target.value);
   };
@@ -93,7 +88,7 @@ function PreviewArea({ character, add_character, set_active }) {
               labelId="demo-simple-select-placeholder-label-label"
               id="demo-simple-select-placeholder-label"
               value={active}
-              onChange={(e) => handleChange(e)}
+              onChange={e => handleChange(e)}
               displayEmpty
               className={classes.selectEmpty}
             >
@@ -130,7 +125,7 @@ function PreviewArea({ character, add_character, set_active }) {
               id={`${x.id}-${i}`}
               key={i}
               className={`absolute`}
-              onMouseDown={(e) => dragMouseDown(e, `${x.id}-${i}`)}
+              onMouseDown={e => dragMouseDown(e, `${x.id}-${i}`)}
             >
               <div id={`${x.id}-div`} className="character">
                 <div
@@ -151,18 +146,16 @@ function PreviewArea({ character, add_character, set_active }) {
   );
 }
 
-// mapping state to props
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     character: state.character,
   };
 };
 
-// mapping functions to components
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     add_character: () => dispatch(addCharacter()),
-    set_active: (ch_id) => dispatch(setActive(ch_id)),
+    set_active: ch_id => dispatch(setActive(ch_id)),
   };
 };
 

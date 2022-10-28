@@ -5,11 +5,6 @@ import PreviewArea from "./components/PreviewArea";
 import { DragDropContext } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import GitHubIcon from "@material-ui/icons/GitHub";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,8 +19,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App({ complist, update_list }) {
-  const classes = useStyles();
-
   // Update Lists of Mid Area
   const onDragEnd = result => {
     let element = result.draggableId.split("-")[0];
@@ -69,7 +62,6 @@ function App({ complist, update_list }) {
   );
 }
 
-// mapping state to props
 const mapStateToProps = state => {
   return {
     complist: state.list,

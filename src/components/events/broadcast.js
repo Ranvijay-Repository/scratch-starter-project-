@@ -8,7 +8,6 @@ const BroadcastMessage = ({ comp_id }) => {
     message: "Hey !",
   });
 
-  /* Display Snackbar */
   const handleClick = () => {
     enqueueSnackbar(state.message, { variant: "info" });
   };

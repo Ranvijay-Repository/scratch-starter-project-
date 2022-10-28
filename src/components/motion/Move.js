@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 
-// Move Component for Sidebar
 const Move = ({ character, comp_id }) => {
   const [steps, setSteps] = useState(20);
 
-  // Function used for moiving Sprint
   const handleClick = () => {
     const el = document.getElementById(`${character.active}-div`);
 
@@ -27,7 +25,7 @@ const Move = ({ character, comp_id }) => {
           type="number"
           className="text-black text-center w-16 mx-2"
           value={steps}
-          onChange={(e) => setSteps(parseInt(e.target.value))}
+          onChange={e => setSteps(parseInt(e.target.value))}
         />{" "}
         steps
       </div>
@@ -35,8 +33,7 @@ const Move = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to component
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     character: state.character,
   };

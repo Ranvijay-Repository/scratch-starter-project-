@@ -6,7 +6,7 @@ const Size = ({ character, comp_id }) => {
   const [state, setState] = useState({
     scale: 1,
   });
-  // To change Size of Sprint
+
   const changeSize = () => {
     const el = document.getElementById(character.active);
     el.style.transform = `scale(${state.scale})`;
@@ -21,7 +21,7 @@ const Size = ({ character, comp_id }) => {
             className="mx-2 p-1 py-0 text-center"
             type="number"
             value={state.scale}
-            onChange={(e) =>
+            onChange={e =>
               setState({ ...state, scale: parseInt(e.target.value) })
             }
           />
@@ -38,8 +38,7 @@ const Size = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to component
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     character: state.character,
   };

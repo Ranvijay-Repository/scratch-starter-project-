@@ -8,7 +8,7 @@ const ThinkWithTimer = ({ character, comp_id }) => {
     timer_message: "Think",
     timer_for_msg: 2,
   });
-  /* Display Think Message with Timer */
+
   const displayMessage = () => {
     const el = document.getElementById(`${character.active}-message-box`);
     const el2 = document.getElementById(`${character.active}-message-box1`);
@@ -72,7 +72,6 @@ const ThinkWithTimer = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to component
 const mapStateToProps = state => {
   return {
     character: state.character,

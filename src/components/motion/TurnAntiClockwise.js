@@ -7,12 +7,11 @@ import Paper from "@material-ui/core/Paper";
 const TurnAntiClockWise = ({ character, characterAngle, comp_id }) => {
   const [angle, setAngle] = useState(20);
 
-  // handle anti-clockwise rotation
   const handleClick = () => {
     let anti_angle = -1 * angle;
     const el = document.getElementById(character.active);
     const character_angle = character.characters.find(
-      (x) => x.id === character.active
+      x => x.id === character.active
     );
     if (character_angle) {
       el.style.transform = `rotate(${character_angle.angle + anti_angle}deg)`;
@@ -29,7 +28,7 @@ const TurnAntiClockWise = ({ character, characterAngle, comp_id }) => {
             className="mx-2 p-1 py-0 text-center"
             type="number"
             value={angle}
-            onChange={(e) => {
+            onChange={e => {
               setAngle(parseInt(e.target.value));
             }}
           />
@@ -50,17 +49,15 @@ const TurnAntiClockWise = ({ character, characterAngle, comp_id }) => {
   );
 };
 
-// mapping state to component
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     character: state.character,
   };
 };
 
-// mapping function to component
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    characterAngle: (angle) => dispatch(setCharacterAngle(angle)),
+    characterAngle: angle => dispatch(setCharacterAngle(angle)),
   };
 };
 

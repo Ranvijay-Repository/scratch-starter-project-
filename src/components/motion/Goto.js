@@ -8,7 +8,6 @@ const GotoXY = ({ character, comp_id }) => {
     goto_y: 20,
   });
 
-  // go to posiiton X and Y
   const gotoXY = () => {
     const el = document.getElementById(`${character.active}-div`);
     el.style.position = "relative";
@@ -24,7 +23,7 @@ const GotoXY = ({ character, comp_id }) => {
             className="mx-2 p-1 py-0 text-center"
             type="number"
             value={state.goto_x}
-            onChange={(e) => {
+            onChange={e => {
               parseInt(e.target.value) !== 0 &&
                 setState({ ...state, goto_x: parseInt(e.target.value) });
             }}
@@ -36,7 +35,7 @@ const GotoXY = ({ character, comp_id }) => {
             className="mx-2 p-1 py-0 text-center"
             type="number"
             value={state.goto_y}
-            onChange={(e) => {
+            onChange={e => {
               parseInt(e.target.value) !== 0 &&
                 setState({ ...state, goto_y: parseInt(e.target.value) });
             }}
@@ -54,8 +53,7 @@ const GotoXY = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to component
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     character: state.character,
   };

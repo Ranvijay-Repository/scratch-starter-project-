@@ -9,7 +9,6 @@ const SayMessageWithTimer = ({ character, comp_id }) => {
     timer_for_msg: 2,
   });
 
-  /* Display Message with Timer */
   const displayMessage = () => {
     const el = document.getElementById(`${character.active}-message-box`);
     const el2 = document.getElementById(`${character.active}-message-box1`);
@@ -40,7 +39,7 @@ const SayMessageWithTimer = ({ character, comp_id }) => {
             className="mx-2 p-1 py-0 text-center"
             type="text"
             value={state.timer_message}
-            onChange={(e) => {
+            onChange={e => {
               e.target.value.length > 0 &&
                 setState({ ...state, timer_message: e.target.value });
             }}
@@ -52,7 +51,7 @@ const SayMessageWithTimer = ({ character, comp_id }) => {
             className="mx-2 p-1 py-0 text-center"
             type="number"
             value={state.timer_for_msg}
-            onChange={(e) => {
+            onChange={e => {
               parseInt(e.target.value) > 0 &&
                 setState({ ...state, timer_for_msg: parseInt(e.target.value) });
             }}
@@ -70,8 +69,7 @@ const SayMessageWithTimer = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to component
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     character: state.character,
   };
